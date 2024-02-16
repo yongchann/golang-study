@@ -3,15 +3,16 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
-var count = 0
+var count int32 = 0
 
 func add(n int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	for i := 0; i < n; i++ {
-		count++
+		atomic.AddInt32(&count, 1)
 	}
 }
 
@@ -32,8 +33,8 @@ func main() {
 
 /*
 [Result]
-count= 1138181
+count= 4000000
 
 [Exp]
-공유자원인 count 에 여러 고루틴이 동시 접근함에 따라 의도한 결과(4000000)가 나오지 않음
+"sync/atomic" 패키지를 사용하여 add 연산을 atomic 처리
 */
