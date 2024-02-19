@@ -36,5 +36,5 @@ func main() {
 count= 4000000
 
 [Exp]
-"sync/atomic" 패키지를 사용하여 add 연산을 atomic 처리
+"sync/atomic" 패키지를 사용하여 add 연산을 atio
 */
